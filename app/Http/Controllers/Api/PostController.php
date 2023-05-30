@@ -11,7 +11,7 @@ class PostController extends Controller
     public function index()
     {
 
-        $posts = Post::all();
+        $posts = Post::with(['technologies', 'types'])->get();
         return response()->json([
             'success' => true,
             'results' => $posts
