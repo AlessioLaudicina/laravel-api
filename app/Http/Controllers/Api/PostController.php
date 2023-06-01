@@ -10,12 +10,21 @@ class PostController extends Controller
 {
     public function index()
     {
-
-        $posts = Post::with(['technologies', 'types'])->get();
+        $posts = Post::with(['technologies', 'type'])->paginate(6);
         return response()->json([
             'success' => true,
             'results' => $posts
 
         ]);
+    }
+
+    public function show($slug){
+        $post = Post::where('slug', $slug)->with(['technologies', 'type'])->first();
+        return response()->json([
+            'success' => true,
+            'post' => $post
+        ]);
+
+
     }
 }
