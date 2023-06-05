@@ -54,6 +54,12 @@ class PostController extends Controller
             return back()->withInput()->withErrors(['slug' => 'Impossibile creare lo slug per questo post, cambia il titolo']);
         }
 
+        if($request->hasFile('cover_image')){
+            $path = Storage::put('cover', $request->cover_image);
+            $validated_data['cover_image'] = $path; 
+
+        }
+
 
         $newPost = Post::create($validated_data);
         $newPost->technologies()->attach($request->technologies);

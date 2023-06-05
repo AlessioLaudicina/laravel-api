@@ -21,7 +21,7 @@
                     <td>{{ $post->type?->name }}</td>
                     <td>
                         @forelse ($post->technologies as $technology)
-                            <span>{{ $technology->name }}</span>
+                            <span class="badge text-bg-secondary d-none d-md-inline">{{ $technology->name }}</span>
 
                         @empty
                         @endforelse

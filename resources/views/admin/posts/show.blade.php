@@ -21,21 +21,14 @@
         <div>
             Tecnologie usate:
             @foreach ($post->technologies as $technology)
-                <span><strong>{{ $technology->name }} </strong></span>
+                <span class="badge text-bg-secondary d-none d-md-inline"><strong>{{ $technology->name }} </strong></span>
             @endforeach
         </div>
 
-        <div class="text-center my-4">
-            <img class="" width="300" src="{{ asset('storage/' . $post['image']) }}"
-                alt="{{ $post['image_original_name'] }}">
-        </div>
-
-
 
 
         <div class="text-center my-4">
-            <img class="" width="300" src="{{ asset('storage/' . $post['image']) }}"
-                alt="{{ $post['image_original_name'] }}">
+            <img class="img-thumbnail " width="300" src="{{ asset('storage/' . $post['cover_image'])}}"/>
         </div>
 
         <a href="{{ route('admin.posts.index', $post) }}" class="btn btn-primary">
