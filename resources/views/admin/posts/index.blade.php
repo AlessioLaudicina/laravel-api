@@ -7,6 +7,7 @@
             <tr>
                 <th scope="col">Titolo</th>
                 <th scope="col">Slug</th>
+                <th scope="col">Cover</th>
                 <th scope="col">Linguaggio</th>
                 <th scope="col">Tecnologie</th>
                 <th scope="col">Azioni</th>
@@ -17,6 +18,7 @@
                 <tr>
 
                     <td>{{ $post->title }}</td>
+                    <td>{{ $post->slug }}</td>
                     <td>{{ $post->slug }}</td>
                     <td>{{ $post->type?->name }}</td>
                     <td>

@@ -3,7 +3,8 @@
 
 
 @section('content')
-    <form method="POST" action="{{ route('admin.posts.update', ['post' => $post->slug]) }}">
+    <form method="POST" action="{{ route('admin.posts.update', ['post' => $post->slug]) }}" class="my-4"
+        enctype="multipart/form-data">
 
         @csrf
         @method('PUT')
@@ -13,17 +14,6 @@
             <input type="text" class="form-control @error('title') is-invalid @enderror " id="title" name="title"
                 value="{{ old('title', $post->title) }}">
             @error('title')
-                <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
-            @enderror
-        </div>
-
-        <div class="mb-3">
-            <label for="cover_image" class="form-label">Cover url</label>
-            <input type="text" class="form-control @error('cover_image') is-invalid @enderror " id="cover_image"
-                name="cover_image" value="{{ old('cover_image', $post->cover_image) }}">
-            @error('cover_image')
                 <div class="invalid-feedback">
                     {{ $message }}
                 </div>
@@ -62,19 +52,24 @@
             @endforeach
         </div>
 
+        <div class="text-center my-4">
+            <img class="img-thumbnail " width="300" src="{{ asset('storage/' . $post['cover_image']) }}" />
+        </div>
+
         <div class="mb-3">
-            <label for="image" class="form-label">Carica immagine</label>
-            <input onchange="showImage(event)" type="file" class="form-control @error('image') is-invalid @enderror"
-                name="image" id="image" placeholder="Add image">
-            @error('image')
+            <label for="cover_image" class="form-label">Modifica immagine di copertina</label>
+            <input type="file" class="form-control @error('cover_image') is-invalid @enderror " id="cover_image"
+                name="cover_image">
+
+            @error('cover_image')
                 <div class="invalid-feedback">
                     {{ $message }}
                 </div>
             @enderror
         </div>
-        <div>
-            <img width="150" id="output-image" src="{{ asset('storage/' . $post['image']) }}" alt="">
-        </div>
+
+
+
 
 
         <button type="submit" class="btn btn-primary">Salva</button>

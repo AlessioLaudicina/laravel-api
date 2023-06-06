@@ -13,7 +13,7 @@ class UpdatePostRquest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,15 +24,17 @@ class UpdatePostRquest extends FormRequest
     public function rules()
     {
         return [
-            
-                'title' => ['required', 'max:150', Rule::unique('posts')->ignore($this->post)],
-                'cover_image' => 'nullable|max:255|url',
-                'content' => 'nullable',
-                'type_id' => 'nullable|exists:types,id',
-                'technologies'=> 'exists:technologies,id'
+
+            'title' => ['required', 'max:150', Rule::unique('posts')->ignore($this->post)],
+            'cover_image' => 'nullable|max:255|url',
+            'content' => 'nullable',
+            'type_id' => 'nullable|exists:types,id',
+            'technologies' => 'exists:technologies,id',
+            'cover_image' => 'nullable|image|max:1024',
 
 
-            
+
+
         ];
     }
 }

@@ -54,10 +54,10 @@ class PostController extends Controller
             return back()->withInput()->withErrors(['slug' => 'Impossibile creare lo slug per questo post, cambia il titolo']);
         }
 
-        if($request->hasFile('cover_image')){
-            $path = Storage::put('cover', $request->cover_image);
-            $validated_data['cover_image'] = $path; 
+        if ($request->hasFile('cover_image')) {
 
+            $path = Storage::put('cover', $request->cover_image);
+            $validated_data['cover_image'] = $path;
         }
 
 
@@ -111,6 +111,17 @@ class PostController extends Controller
         if ($checkPost) {
             return back()->withInput()->withErrors(['slug' => 'Impossibile creare lo slug']);
         }
+
+        if ($request->hasFile('cover_image')) {
+
+            if ($post->cover_image) {
+                Storage::delete($post->cover_image);
+            }
+
+            $path = Storage::put('cover', $request->cover_image);
+            $validated_data['cover_image'] = $path;
+        }
+
         $post->technologies()->sync($request->technologies);
 
         $post->update($validated_data);
@@ -126,6 +137,9 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         $post->delete();
+        if ($post->cover_image) {
+            Storage::delete($post->cover_image);
+        }
         return redirect()->route('admin.posts.index');
     }
 }

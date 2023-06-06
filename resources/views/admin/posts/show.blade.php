@@ -27,9 +27,13 @@
 
 
 
+
+        @if($post->cover_image)
         <div class="text-center my-4">
             <img class="img-thumbnail " width="300" src="{{ asset('storage/' . $post['cover_image'])}}"/>
         </div>
+        @endif
+
 
         <a href="{{ route('admin.posts.index', $post) }}" class="btn btn-primary">
             Torna ai tuoi progetti
